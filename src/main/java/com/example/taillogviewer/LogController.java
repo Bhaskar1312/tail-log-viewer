@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.io.IOException;
 
 @Controller
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*", allowCredentials = "false")
 // @CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true")
 public class LogController {
 
