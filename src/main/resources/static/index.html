@@ -27,7 +27,9 @@
     const stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function () {
+        console.log('Connected: ');
         stompClient.subscribe('/topic/logs', function (message) {
+            console.log('New message: '+message.body);
             logContainer.innerHTML += '<p>' + message.body + '</p>';
             logContainer.scrollTop = logContainer.scrollHeight; // Auto-scroll
         });
