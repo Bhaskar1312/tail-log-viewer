@@ -21,17 +21,29 @@
 
 <script src="https://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
-<script>
-    const logContainer = document.getElementById('log-container');
-    const socket = new SockJS('/ws');
-    const stompClient = Stomp.over(socket);
+<!--<script>-->
+<!--    const logContainer = document.getElementById('log-container');-->
+<!--    const socket = new SockJS('/ws');-->
+<!--    const stompClient = Stomp.over(socket);-->
 
-    stompClient.connect({}, function () {
-        console.log('Connected: ');
-        stompClient.subscribe('/topic/logs', function (message) {
-            console.log('New message: '+message.body);
-            logContainer.innerHTML += '<p>' + message.body + '</p>';
-            logContainer.scrollTop = logContainer.scrollHeight; // Auto-scroll
+<!--    stompClient.connect({}, function () {-->
+<!--        console.log('Connected: ');-->
+<!--        stompClient.subscribe('/topic/logs', function (message) {-->
+<!--            console.log('New message: '+message.body);-->
+<!--            logContainer.innerHTML += '<p>' + message.body + '</p>';-->
+<!--            logContainer.scrollTop = logContainer.scrollHeight; // Auto-scroll-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<script type="text/javascript">
+    var socket = new SockJS('/ws');
+    var stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function(frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/process-output', function(message) {
+            document.getElementById('log-container').innerHTML += '<p>'+message.body+'</p>'
+            document.getElementById('log-container').scrollTop = document.getElementById('log-container').scrollHeight;
         });
     });
 </script>
